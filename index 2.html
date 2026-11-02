@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07110f">
+<title>WINN GOAL</title>
+<style>
+:root{--bg:#07110f;--panel:#101d19;--panel2:#162720;--line:#263a31;--text:#f1f7f3;--muted:#9bb0a4;--green:#27df91;--yellow:#f4c65e;--red:#ff7070}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% -10%,#17382a 0,transparent 34%),var(--bg);color:var(--text);font:15px system-ui,-apple-system,Segoe UI,sans-serif}
+header{padding:22px 16px 16px;max-width:1000px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{font-weight:900;letter-spacing:1.5px;font-size:24px}.brand span{color:var(--green)}.sub{color:var(--muted);font-size:12px;margin-top:3px}
+.pill{border:1px solid #236448;color:var(--green);padding:7px 10px;border-radius:30px;font-size:11px;font-weight:800;letter-spacing:.6px}
+main{max-width:1000px;margin:auto;padding:0 16px 40px}
+.hero{background:linear-gradient(125deg,#153b2b,#10251d 65%,#122019);border:1px solid #28513d;border-radius:20px;padding:20px;margin-bottom:16px}
+.hero h1{font-size:25px;margin:0 0 7px}.hero p{color:#c1d4c9;margin:0;line-height:1.5;font-size:13px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:17px}.stat{background:#071b13a8;border:1px solid #2b4b3b;border-radius:13px;padding:11px}.stat b{font-size:20px;display:block}.stat small{color:#a9c2b3;font-size:11px}
+.tabs{display:flex;gap:7px;overflow:auto;margin:16px 0}.tab{white-space:nowrap;border:1px solid var(--line);background:var(--panel);color:var(--muted);padding:10px 14px;border-radius:12px;font-weight:700}.tab.active{background:var(--green);color:#062015;border-color:var(--green)}
+.toolbar{display:flex;gap:9px;align-items:center;justify-content:space-between;margin:12px 0;flex-wrap:wrap}.toolbar h2{font-size:17px;margin:0}.filters{display:flex;gap:7px}
+select,input,button{font:inherit}select,.field{background:#0c1914;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:10px}
+.match{background:linear-gradient(145deg,var(--panel),#0c1712);border:1px solid var(--line);border-radius:16px;padding:15px;margin:10px 0}
+.matchtop{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:11px;gap:8px}.live{color:#ff8585;font-weight:900}.teams{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;margin:17px 0 13px}.team{font-weight:750;font-size:14px}.team:last-child{text-align:right}.score{text-align:center;font-size:22px;font-weight:900;min-width:65px}.score small{display:block;font-size:10px;color:var(--muted);font-weight:600}
+.signalrow{display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid var(--line);padding-top:12px}.signal{font-size:12px;font-weight:900;border-radius:9px;padding:7px 10px}.strong{background:#123e2c;color:#51f0a8}.medium{background:#433719;color:#ffd77a}.weak{background:#392426;color:#ff9999}
+.meter{height:7px;background:#26362e;border-radius:20px;overflow:hidden;margin-top:7px}.meter i{display:block;height:100%;background:var(--green);border-radius:20px}.percent{font-size:20px;font-weight:900}
+.details{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:12px}.detail{background:#0a1510;border-radius:9px;padding:8px;text-align:center}.detail b{display:block;font-size:15px}.detail small{font-size:10px;color:var(--muted)}
+button.action{background:var(--green);color:#062015;border:0;padding:11px 14px;border-radius:10px;font-weight:850}
+button.ghost{background:#14231c;color:var(--text);border:1px solid var(--line);padding:10px 12px;border-radius:10px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin:12px 0}.panel h3{margin:0 0 12px;font-size:16px}.formgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.formgrid label{font-size:12px;color:var(--muted);display:grid;gap:5px}.formgrid input{width:100%}
+.note{font-size:12px;line-height:1.55;color:var(--muted);background:#101a16;border-left:3px solid var(--yellow);padding:11px 12px;border-radius:8px;margin-top:14px}
+.hidden{display:none!important}.empty{text-align:center;padding:35px;color:var(--muted)}
+footer{text-align:center;color:#71877a;font-size:11px;padding:20px}
+@media(max-width:520px){.stats{grid-template-columns:repeat(3,1fr)}.stat b{font-size:17px}.details{grid-template-columns:repeat(4,1fr)}.team{font-size:12px}.formgrid{grid-template-columns:1fr}.hero h1{font-size:22px}}
+</style>
+</head>
+<body>
+<header><div><div class="brand">WINN <span>GOAL</span></div><div class="sub">FUTBOL • GOL İHTİMAL ANALİZİ</div></div><div class="pill">BETA SÜRÜMÜ</div></header>
+<main>
+<section class="hero"><h1>Gol sinyallerini takip et.</h1><p>Maç öncesi verileri ve canlı maç istatistiklerini puanlayarak gol ihtimalini değerlendir. Sinyaller tahmindir; kesin sonuç veya bahis tavsiyesi değildir.</p>
+<div class="stats"><div class="stat"><b id="matchCount">3</b><small>ÖRNEK MAÇ</small></div><div class="stat"><b id="signalCount">2</b><small>GÜÇLÜ SİNYAL</small></div><div class="stat"><b>0–90'</b><small>CANLI TAKİP</small></div></div></section>
+<nav class="tabs"><button class="tab active" data-tab="live">Canlı maçlar</button><button class="tab" data-tab="pre">Maç öncesi</button><button class="tab" data-tab="manual">Manuel analiz</button></nav>
+<section id="live"><div class="toolbar"><h2>🔴 Canlı maç sinyalleri</h2><div class="filters"><select id="liveFilter"><option value="all">Tüm sinyaller</option><option value="strong">Güçlü</option><option value="medium">Orta</option><option value="weak">Zayıf</option></select></div></div><div id="liveList"></div></section>
+<section id="pre" class="hidden"><div class="toolbar"><h2>📊 Maç öncesi analiz</h2></div><div id="preList"></div><div class="note">Maç öncesi puanlar örnek verilerle gösterilir. Gerçek takım formu ve kadro verisi bağlandığında otomatik hesaplanacaktır.</div></section>
+<section id="manual" class="hidden"><div class="panel"><h3>⚙️ Canlı maç verisini gir, sinyali hesapla</h3><div class="formgrid">
+<label>Ev sahibi<input id="home" class="field" value="Ev Sahibi"></label><label>Deplasman<input id="away" class="field" value="Deplasman"></label>
+<label>Maç dakikası<input id="minute" class="field" type="number" min="1" max="90" value="68"></label><label>Toplam gol<input id="goals" class="field" type="number" min="0" max="20" value="1"></label>
+<label>Toplam şut<input id="shots" class="field" type="number" min="0" max="50" value="17"></label><label>İsabetli şut<input id="sot" class="field" type="number" min="0" max="30" value="6"></label>
+<label>Korner<input id="corners" class="field" type="number" min="0" max="30" value="8"></label><label>Tehlikeli atak<input id="attacks" class="field" type="number" min="0" max="150" value="48"></label>
+<label>Son 10 dk şut<input id="recent" class="field" type="number" min="0" max="15" value="4"></label><label>Son 10 dk isabetli şut<input id="recentSot" class="field" type="number" min="0" max="10" value="2"></label>
+</div><button class="action" style="margin-top:13px;width:100%" id="calc">Gol sinyalini hesapla</button><div id="manualResult"></div></div></section>
+<div class="note"><b>Veri bağlantısı notu:</b> Bu ilk sürüm çalışan arayüz ve analiz motorudur; ekrandaki maçlar örnektir. Gerçek zamanlı tüm ligler, dakika ve istatistikler için bir futbol veri sağlayıcısının API anahtarı ve güvenli sunucu bağlantısı gerekir. API anahtarını herkese açık HTML dosyasına koyma.</div>
+</main><footer>WINN GOAL • İstatistiksel analiz aracı • Sonuç garantisi vermez</footer>
+<script>
+const liveGames=[
+ {league:"ÖRNEK LİG • DEMO",minute:68,home:"Kuzey FK",away:"Sahilspor",score:"1 - 1",shots:17,sot:6,corners:8,attacks:48,recent:4,recentSot:2},
+ {league:"ÖRNEK LİG • DEMO",minute:54,home:"Mavişehir",away:"Yıldız SK",score:"0 - 0",shots:12,sot:4,corners:6,attacks:39,recent:3,recentSot:1},
+ {league:"ÖRNEK LİG • DEMO",minute:79,home:"Güney  FK",away:"Dağspor",score:"2 - 0",shots:8,sot:2,corners:3,attacks:21,recent:0,recentSot:0}
+];
+const preGames=[
+ {league:"MAÇ ÖNCESİ • DEMO",home:"Atlas FK",away:"Birlikspor",homeAvg:1.9,awayAvg:1.5,both:68,over:74},
+ {league:"MAÇ ÖNCESİ • DEMO",home:"Kıyıspor",away:"Kent FK",homeAvg:1.2,awayAvg:0.9,both:42,over:38}
+];
+function analyze(x){
+ let p=0;
+ p+=Math.min(18,x.sot*3);p+=Math.min(14,x.corners*1.8);p+=Math.min(15,x.recent*3);
+ p+=Math.min(15,x.recentSot*5);p+=Math.min(12,x.attacks*.25);p+=Math.min(10,x.shots*.55);
+ if(x.minute>=25&&x.minute<=85)p+=8;if(x.minute>85)p+=4;
+ if(x.goals!==undefined&&x.goals>=3)p-=10;
+ return Math.max(0,Math.min(99,Math.round(p)));
+}
+function grade(p){return p>=70?["GÜÇLÜ SİNYAL","strong"]:p>=48?["ORTA SİNYAL","medium"]:["ZAYIF SİNYAL","weak"]}
+function card(x,pre=false){let p=pre?Math.round((x.both+x.over)/2):analyze(x);let [g,c]=grade(p);
+ return `<article class="match"><div class="matchtop"><span>${x.league}</span><span class="${pre?"":"live"}">${pre?"BAŞLAMADI":x.minute+"' CANLI"}</span></div><div class="teams"><div class="team">${x.home}</div><div class="score">${pre?"VS":x.score}<small>${pre?"MAÇ ÖNCESİ":"SKOR"}</small></div><div class="team">${x.away}</div></div><div class="signalrow"><div><span class="signal ${c}">${g}</span><div class="meter" style="width:min(52vw,290px)"><i style="width:${p}%"></i></div></div><div style="text-align:right"><div class="percent">${p}%</div><small style="color:var(--muted)">ANALİZ PUANI</small></div></div>${pre?`<div class="details"><div class="detail"><b>${x.homeAvg}</b><small>Ev gol ort.</small></div><div class="detail"><b>${x.awayAvg}</b><small>Dep. gol ort.</small></div><div class="detail"><b>${x.both}%</b><small>KG olasılığı*</small></div><div class="detail"><b>${x.over}%</b><small>2.5 üst*</small></div></div>`:`<div class="details"><div class="detail"><b>${x.shots}</b><small>Şut</small></div><div class="detail"><b>${x.sot}</b><small>İsabetli</small></div><div class="detail"><b>${x.corners}</b><small>Korner</small></div><div class="detail"><b>${x.recent}</b><small>Son 10 dk şut</small></div></div>`}</article>`
+}
+function render(){let filter=document.getElementById("liveFilter").value;let rows=liveGames.map(x=>({...x,goals:Number(x.score.split("-")[0])+Number(x.score.split("-")[1])})).filter(x=>filter==="all"||grade(analyze(x))[1]===filter);
+ document.getElementById("liveList").innerHTML=rows.length?rows.map(x=>card(x)).join(""):'<div class="empty">Bu filtrede maç yok.</div>';
+ document.getElementById("preList").innerHTML=preGames.map(x=>card(x,true)).join("");
+ document.getElementById("matchCount").textContent=liveGames.length+preGames.length;
+ document.getElementById("signalCount").textContent=liveGames.filter(x=>grade(analyze({...x,goals:0}))[1]==="strong").length;
+}
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));b.classList.add("active");["live","pre","manual"].forEach(id=>document.getElementById(id).classList.toggle("hidden",id!==b.dataset.tab));}));
+document.getElementById("liveFilter").addEventListener("change",render);
+document.getElementById("calc").addEventListener("click",()=>{
+ const v=id=>Number(document.getElementById(id).value)||0;
+ const x={minute:v("minute"),goals:v("goals"),shots:v("shots"),sot:v("sot"),corners:v("corners"),attacks:v("attacks"),recent:v("recent"),recentSot:v("recentSot")};
+ const p=analyze(x),[g,c]=grade(p);
+ document.getElementById("manualResult").innerHTML=`<div class="signalrow" style="margin-top:15px"><div><span class="signal ${c}">${g}</span><p style="color:var(--muted);font-size:12px">${document.getElementById("home").value} – ${document.getElementById("away").value}</p></div><div class="percent">${p}%</div></div><div class="meter"><i style="width:${p}%"></i></div><p style="color:var(--muted);font-size:12px">Bu puan girilen istatistiklerden üretilen deneysel göstergedir; gerçek gol olasılığı veya garanti değildir.</p>`;
+});
+render();
+</script></body></html>
