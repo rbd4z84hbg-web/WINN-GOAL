@@ -20,7 +20,7 @@
 <footer>WINN GOAL © 2026<br>Tahminler olasılık hesabıdır. Kesin sonuç veya kazanç garantisi değildir.</footer>
 </main>
 <script>
-const API='https://winn-goal-live.esemlakfinike007.workers.dev';const $=id=>document.getElementById(id);let selectedMatches=[],oldScores={},notifications=false;
+const API='https://quiet-mode-2771.esemlakfinike007.workers.dev';
 function show(id){document.querySelectorAll('main section').forEach(s=>s.classList.add('hidden'));$(id).classList.remove('hidden');if(id==='live')loadLive();if(id==='today')loadToday();if(id==='upcoming')loadUpcoming();if(id==='signals')loadSignals()}
 function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 async function get(path){const r=await fetch(API+path,{cache:'no-store'});const d=await r.json();if(!r.ok||d.error)throw Error(d.error||'API bağlantı hatası');return d}
